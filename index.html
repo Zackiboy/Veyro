@@ -1035,27 +1035,68 @@
     updateTimer();
 
 
-    /*
-      Waitlist demo
-    */
+/*
+  Veyro Waitlist
+  Saves emails to Supabase
+*/
 
-    const form = document.getElementById("waitlistForm");
-    const message = document.getElementById("formMessage");
+const SUPABASE_URL = "https://vltduiizkbzuupeyjdms.supabase.co";
+const SUPABASE_ANON_KEY = "YOUR_PUBLISHABLE_KEY_HERE";
 
-    form.addEventListener("submit", function(event) {
+const form = document.getElementById("waitlistForm");
+const message = document.getElementById("formMessage");
 
-      event.preventDefault();
+form.addEventListener("submit", async function(event) {
+  event.preventDefault();
 
-      const email = document.getElementById("email").value;
+  const emailInput = document.getElementById("email");
+  const email = emailInput.value.trim().toLowerCase();
 
-      if (!email) return;
+  if (!email) return;
 
-      message.textContent =
-        "Thanks — you're on the Veyro list.";
+  const submitButton = form.querySelector("button");
 
-      form.reset();
+  submitButton.disabled = true;
+  submitButton.textContent = "Joining...";
+  message.textContent = "";
 
-    });
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/waitlist`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": SUPABASE_ANON_KEY,
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
+          "Prefer": "return=minimal"
+        },
+        body: JSON.stringify({
+          email: email
+        })
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Could not save email");
+    }
+
+    message.textContent =
+      "Thanks — you're on the Veyro list! 🚀";
+
+    emailInput.value = "";
+
+  } catch (error) {
+    console.error("Veyro waitlist error:", error);
+
+    message.textContent =
+      "Something went wrong. Please try again.";
+
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "Join Waitlist";
+  }
+});
 
   </script>
 
