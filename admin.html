@@ -20,6 +20,10 @@
       min-height: 100vh;
     }
 
+    .hidden {
+      display: none !important;
+    }
+
     header {
       padding: 25px 6%;
       border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -39,6 +43,80 @@
       font-size: 14px;
     }
 
+    /* LOGIN */
+
+    #loginScreen {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 430px;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 25px;
+      padding: 40px;
+    }
+
+    .login-box h1 {
+      font-size: 42px;
+      letter-spacing: -3px;
+      margin-bottom: 10px;
+    }
+
+    .login-box p {
+      color: #999;
+      margin-bottom: 30px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 15px 18px;
+      margin-bottom: 12px;
+      background: #080808;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      outline: none;
+    }
+
+    .login-box input:focus {
+      border-color: rgba(255,255,255,0.35);
+    }
+
+    .login-button {
+      width: 100%;
+      border: none;
+      background: white;
+      color: black;
+      padding: 15px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .login-button:disabled {
+      opacity: 0.5;
+      cursor: wait;
+    }
+
+    .login-message {
+      color: #ff6b55;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    /* DASHBOARD */
+
+    #dashboard {
+      display: none;
+    }
+
     main {
       max-width: 1200px;
       margin: auto;
@@ -54,6 +132,22 @@
     .subtitle {
       color: #999;
       margin-bottom: 45px;
+    }
+
+    .dashboard-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .logout {
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+      color: white;
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
     }
 
     .stats {
@@ -158,85 +252,219 @@
       td {
         padding: 14px;
       }
+
+      .login-box {
+        padding: 30px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">VEYRO</div>
-  <div class="admin-label">ADMIN DASHBOARD</div>
-</header>
+<!-- LOGIN -->
 
-<main>
+<section id="loginScreen">
 
-  <h1>Dashboard.</h1>
+  <div class="login-box">
 
-  <p class="subtitle">
-    Veyro One waitlist and customer overview.
-  </p>
+    <h1>Admin.</h1>
 
-  <div class="stats">
+    <p>
+      Sign in to access the Veyro dashboard.
+    </p>
 
-    <div class="stat">
-      <div class="stat-label">TOTAL SIGNUPS</div>
-      <div class="stat-value" id="totalSignups">—</div>
-    </div>
+    <form id="loginForm">
 
-    <div class="stat">
-      <div class="stat-label">TODAY</div>
-      <div class="stat-value" id="todaySignups">—</div>
-    </div>
+      <input
+        type="email"
+        id="loginEmail"
+        placeholder="Admin email"
+        required
+      >
 
-    <div class="stat">
-      <div class="stat-label">LATEST SIGNUP</div>
-      <div class="stat-value" id="latestSignup">—</div>
-    </div>
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Password"
+        required
+      >
 
-  </div>
-
-  <div class="panel">
-
-    <div class="panel-header">
-      <h2>Waitlist</h2>
-
-      <button class="refresh" onclick="loadWaitlist()">
-        Refresh
+      <button
+        type="submit"
+        class="login-button"
+        id="loginButton"
+      >
+        Sign In
       </button>
-    </div>
 
-    <div class="table-wrapper">
+    </form>
 
-      <table>
-
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Email</th>
-            <th>Joined</th>
-          </tr>
-        </thead>
-
-        <tbody id="waitlistBody">
-          <tr>
-            <td colspan="3" class="empty">
-              Loading...
-            </td>
-          </tr>
-        </tbody>
-
-      </table>
-
-    </div>
+    <div
+      class="login-message"
+      id="loginMessage"
+    ></div>
 
   </div>
 
-  <div class="status" id="status">
-    Connecting to Veyro database...
-  </div>
+</section>
 
-</main>
+
+<!-- DASHBOARD -->
+
+<div id="dashboard">
+
+  <header>
+
+    <div class="logo">
+      VEYRO
+    </div>
+
+    <div class="dashboard-actions">
+
+      <div class="admin-label">
+        ADMIN DASHBOARD
+      </div>
+
+      <button
+        class="logout"
+        onclick="logout()"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main>
+
+    <h1>Dashboard.</h1>
+
+    <p class="subtitle">
+      Veyro One waitlist and customer overview.
+    </p>
+
+
+    <div class="stats">
+
+      <div class="stat">
+
+        <div class="stat-label">
+          TOTAL SIGNUPS
+        </div>
+
+        <div
+          class="stat-value"
+          id="totalSignups"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-label">
+          TODAY
+        </div>
+
+        <div
+          class="stat-value"
+          id="todaySignups"
+        >
+          —
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-label">
+          LATEST SIGNUP
+        </div>
+
+        <div
+          class="stat-value"
+          id="latestSignup"
+        >
+          —
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel">
+
+      <div class="panel-header">
+
+        <h2>
+          Waitlist
+        </h2>
+
+        <button
+          class="refresh"
+          onclick="loadWaitlist()"
+        >
+          Refresh
+        </button>
+
+      </div>
+
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Joined</th>
+            </tr>
+
+          </thead>
+
+
+          <tbody id="waitlistBody">
+
+            <tr>
+
+              <td
+                colspan="3"
+                class="empty"
+              >
+                Loading...
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="status"
+      id="status"
+    >
+      Connecting...
+    </div>
+
+  </main>
+
+</div>
+
 
 <script>
 
@@ -244,15 +472,129 @@ const SUPABASE_URL =
   "https://vltduiizkbzuupeyjdms.supabase.co";
 
 const SUPABASE_ANON_KEY =
-  "sb_publishable_RZSnpBfbRIwQju3yqJl3eQ_ZugOxIdJ";
+  "YOUR_PUBLISHABLE_KEY_HERE";
 
+
+/* LOGIN */
+
+const loginForm =
+  document.getElementById("loginForm");
+
+loginForm.addEventListener(
+  "submit",
+  async function(event) {
+
+    event.preventDefault();
+
+    const email =
+      document.getElementById("loginEmail").value.trim();
+
+    const password =
+      document.getElementById("loginPassword").value;
+
+    const button =
+      document.getElementById("loginButton");
+
+    const message =
+      document.getElementById("loginMessage");
+
+    button.disabled = true;
+    button.textContent = "Signing in...";
+    message.textContent = "";
+
+    try {
+
+      const response = await fetch(
+        `${SUPABASE_URL}/auth/v1/token?grant_type=password`,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_ANON_KEY
+          },
+
+          body: JSON.stringify({
+            email: email,
+            password: password
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.error_description ||
+          data.msg ||
+          "Login failed"
+        );
+      }
+
+      localStorage.setItem(
+        "veyro_access_token",
+        data.access_token
+      );
+
+      localStorage.setItem(
+        "veyro_refresh_token",
+        data.refresh_token
+      );
+
+      showDashboard();
+
+    } catch (error) {
+
+      console.error(error);
+
+      message.textContent =
+        "Incorrect email or password.";
+
+    } finally {
+
+      button.disabled = false;
+      button.textContent = "Sign In";
+
+    }
+
+  }
+);
+
+
+/* SHOW DASHBOARD */
+
+function showDashboard() {
+
+  document.getElementById("loginScreen")
+    .classList.add("hidden");
+
+  document.getElementById("dashboard")
+    .style.display = "block";
+
+  loadWaitlist();
+
+}
+
+
+/* LOAD WAITLIST */
 
 async function loadWaitlist() {
 
-  const body = document.getElementById("waitlistBody");
-  const status = document.getElementById("status");
+  const body =
+    document.getElementById("waitlistBody");
 
-  status.textContent = "Loading...";
+  const status =
+    document.getElementById("status");
+
+  const accessToken =
+    localStorage.getItem("veyro_access_token");
+
+  if (!accessToken) {
+    return;
+  }
+
+  status.textContent =
+    "Loading...";
 
   try {
 
@@ -263,45 +605,68 @@ async function loadWaitlist() {
 
         headers: {
           "apikey": SUPABASE_ANON_KEY,
-          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+          "Authorization":
+            `Bearer ${accessToken}`
         }
       }
     );
 
     if (!response.ok) {
 
-      const error = await response.text();
+      const error =
+        await response.text();
 
       console.error(error);
 
       throw new Error(error);
+
     }
 
-    const data = await response.json();
+    const data =
+      await response.json();
 
-    document.getElementById("totalSignups").textContent =
-      data.length;
 
-    const today = new Date().toISOString().slice(0, 10);
+    document.getElementById(
+      "totalSignups"
+    ).textContent = data.length;
 
-    const todayCount = data.filter(row => {
-      return row.created_at.slice(0, 10) === today;
-    }).length;
 
-    document.getElementById("todaySignups").textContent =
-      todayCount;
+    const today =
+      new Date().toISOString().slice(0, 10);
+
+
+    const todayCount =
+      data.filter(row => {
+
+        return row.created_at.slice(0, 10)
+          === today;
+
+      }).length;
+
+
+    document.getElementById(
+      "todaySignups"
+    ).textContent = todayCount;
+
 
     if (data.length > 0) {
 
-      const latestDate = new Date(data[0].created_at);
+      const latestDate =
+        new Date(data[0].created_at);
 
-      document.getElementById("latestSignup").textContent =
+      document.getElementById(
+        "latestSignup"
+      ).textContent =
         latestDate.toLocaleDateString();
+
     } else {
 
-      document.getElementById("latestSignup").textContent =
-        "None";
+      document.getElementById(
+        "latestSignup"
+      ).textContent = "None";
+
     }
+
 
     if (data.length === 0) {
 
@@ -315,20 +680,24 @@ async function loadWaitlist() {
 
     } else {
 
-      body.innerHTML = data.map(row => {
+      body.innerHTML =
+        data.map(row => {
 
-        const date = new Date(row.created_at);
+          const date =
+            new Date(row.created_at);
 
-        return `
-          <tr>
-            <td>${row.id}</td>
-            <td>${escapeHtml(row.email)}</td>
-            <td>${date.toLocaleString()}</td>
-          </tr>
-        `;
+          return `
+            <tr>
+              <td>${row.id}</td>
+              <td>${escapeHtml(row.email)}</td>
+              <td>${date.toLocaleString()}</td>
+            </tr>
+          `;
 
-      }).join("");
+        }).join("");
+
     }
+
 
     status.textContent =
       `Connected • ${data.length} signup${data.length === 1 ? "" : "s"}`;
@@ -346,10 +715,14 @@ async function loadWaitlist() {
     `;
 
     status.textContent =
-      "Database connection failed.";
+      "You are logged in, but the database still needs the admin read permission.";
+
   }
+
 }
 
+
+/* ESCAPE HTML */
 
 function escapeHtml(value) {
 
@@ -359,10 +732,38 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+
 }
 
 
-loadWaitlist();
+/* LOGOUT */
+
+function logout() {
+
+  localStorage.removeItem(
+    "veyro_access_token"
+  );
+
+  localStorage.removeItem(
+    "veyro_refresh_token"
+  );
+
+  location.reload();
+
+}
+
+
+/* CHECK EXISTING LOGIN */
+
+if (
+  localStorage.getItem(
+    "veyro_access_token"
+  )
+) {
+
+  showDashboard();
+
+}
 
 </script>
 
