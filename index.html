@@ -1041,7 +1041,7 @@
 */
 
 const SUPABASE_URL = "https://vltduiizkbzuupeyjdms.supabase.co";
-const SUPABASE_ANON_KEY = "YOUR_PUBLISHABLE_KEY_HERE";
+const SUPABASE_ANON_KEY = "sb_publishable_RZSnpBfbRIwQju3yqJl3eQ_ZugOxIdJ";
 
 const form = document.getElementById("waitlistForm");
 const message = document.getElementById("formMessage");
@@ -1078,19 +1078,17 @@ form.addEventListener("submit", async function(event) {
     );
 
     if (!response.ok) {
-      throw new Error("Could not save email");
+      const errorText = await response.text();
+      console.error("Supabase error:", errorText);
+      throw new Error(errorText);
     }
 
-    message.textContent =
-      "Thanks — you're on the Veyro list! 🚀";
-
+    message.textContent = "Thanks — you're on the Veyro list! 🚀";
     emailInput.value = "";
 
   } catch (error) {
     console.error("Veyro waitlist error:", error);
-
-    message.textContent =
-      "Something went wrong. Please try again.";
+    message.textContent = "Something went wrong. Please try again.";
 
   } finally {
     submitButton.disabled = false;
