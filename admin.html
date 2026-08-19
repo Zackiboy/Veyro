@@ -1,994 +1,1295 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Veyro Admin</title>
+<title>Veyro Admin Dashboard</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
 
-    :root {
-      --bg: #070707;
-      --surface: #111;
-      --surface-2: #171717;
-      --text: #f5f5f5;
-      --muted: #999;
-      --border: rgba(255,255,255,0.09);
-      --accent: #ff4b32;
-    }
+body {
+font-family: Arial, Helvetica, sans-serif;
+background: #070707;
+color: #f5f5f5;
+min-height: 100vh;
+}
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+.hidden {
+display: none !important;
+}
 
-    button,
-    input {
-      font: inherit;
-    }
+/* LOGIN */
 
-    /* LOGIN */
+#loginScreen {
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 30px;
+}
 
-    #loginScreen {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 25px;
-    }
+.login-box {
+width: 100%;
+max-width: 430px;
+background: #111;
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 25px;
+padding: 40px;
+}
 
-    .login-box {
-      width: 100%;
-      max-width: 420px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 25px;
-      padding: 40px;
-    }
+.login-logo {
+font-size: 20px;
+font-weight: 900;
+letter-spacing: 4px;
+margin-bottom: 35px;
+}
 
-    .logo {
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: 4px;
-      margin-bottom: 35px;
-    }
+.login-box h1 {
+font-size: 48px;
+letter-spacing: -3px;
+margin-bottom: 10px;
+}
 
-    .login-box h1 {
-      font-size: 42px;
-      letter-spacing: -2px;
-      margin-bottom: 10px;
-    }
+.login-box p {
+color: #999;
+margin-bottom: 30px;
+}
 
-    .login-box p {
-      color: var(--muted);
-      margin-bottom: 30px;
-    }
+.login-box input {
+width: 100%;
+padding: 15px 18px;
+margin-bottom: 12px;
+background: #080808;
+color: white;
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 12px;
+outline: none;
+}
 
-    .login-box input {
-      width: 100%;
-      padding: 15px 18px;
-      margin-bottom: 12px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #090909;
-      color: white;
-      outline: none;
-    }
+.login-box input:focus {
+border-color: rgba(255,255,255,0.35);
+}
 
-    .login-box input:focus {
-      border-color: rgba(255,255,255,0.3);
-    }
+.login-button {
+width: 100%;
+border: none;
+background: white;
+color: black;
+padding: 15px;
+border-radius: 999px;
+font-weight: 700;
+cursor: pointer;
+margin-top: 8px;
+}
 
-    .login-button {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 12px;
-      background: white;
-      color: black;
-      font-weight: 800;
-      cursor: pointer;
-    }
+.login-button:disabled {
+opacity: 0.5;
+cursor: wait;
+}
 
-    .login-button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+.login-message {
+color: #ff6b55;
+margin-top: 15px;
+font-size: 14px;
+}
 
-    .error {
-      color: #ff6b55;
-      margin-top: 15px;
-      font-size: 14px;
-      min-height: 20px;
-    }
+/* HEADER */
 
-    /* DASHBOARD */
+#dashboard {
+display: none;
+}
 
-    #dashboard {
-      display: none;
-    }
+header {
+padding: 22px 6%;
+border-bottom: 1px solid rgba(255,255,255,0.1);
+display: flex;
+justify-content: space-between;
+align-items: center;
+position: sticky;
+top: 0;
+z-index: 10;
+background: rgba(7,7,7,0.85);
+backdrop-filter: blur(15px);
+}
 
-    header {
-      padding: 22px 6%;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
+.logo {
+font-weight: 900;
+letter-spacing: 4px;
+font-size: 22px;
+}
 
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
+.header-right {
+display: flex;
+align-items: center;
+gap: 15px;
+}
 
-    .admin-label {
-      color: var(--muted);
-      font-size: 14px;
-    }
+.admin-label {
+color: #999;
+font-size: 13px;
+}
 
-    .logout {
-      border: 1px solid var(--border);
-      background: transparent;
-      color: white;
-      padding: 9px 15px;
-      border-radius: 999px;
-      cursor: pointer;
-    }
+.logout {
+border: 1px solid rgba(255,255,255,0.15);
+background: transparent;
+color: white;
+padding: 9px 16px;
+border-radius: 999px;
+font-weight: 700;
+cursor: pointer;
+}
 
-    main {
-      max-width: 1200px;
-      margin: auto;
-      padding: 60px 6%;
-    }
+/* MAIN */
 
-    h2 {
-      font-size: clamp(45px, 6vw, 70px);
-      letter-spacing: -4px;
-      margin-bottom: 10px;
-    }
+main {
+max-width: 1250px;
+margin: auto;
+padding: 60px 6%;
+}
 
-    .subtitle {
-      color: var(--muted);
-      margin-bottom: 45px;
-    }
+.eyebrow {
+color: #ff4b32;
+text-transform: uppercase;
+letter-spacing: 3px;
+font-size: 11px;
+font-weight: 700;
+margin-bottom: 15px;
+}
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 40px;
-    }
+h1 {
+font-size: clamp(45px, 6vw, 75px);
+letter-spacing: -4px;
+margin-bottom: 10px;
+}
 
-    .stat {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 28px;
-    }
+.subtitle {
+color: #999;
+margin-bottom: 45px;
+}
 
-    .stat-label {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 12px;
-      letter-spacing: 1px;
-    }
+/* STATS */
 
-    .stat-value {
-      font-size: 42px;
-      font-weight: 800;
-    }
+.stats {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 15px;
+margin-bottom: 20px;
+}
 
-    .panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-    }
+.stat {
+background: #111;
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 20px;
+padding: 25px;
+}
 
-    .panel-header {
-      padding: 22px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-    }
+.stat-label {
+color: #999;
+font-size: 12px;
+letter-spacing: 1px;
+margin-bottom: 12px;
+}
 
-    .panel-header h3 {
-      font-size: 20px;
-    }
+.stat-value {
+font-size: 36px;
+font-weight: 800;
+}
 
-    .refresh {
-      border: none;
-      background: white;
-      color: black;
-      padding: 9px 16px;
-      border-radius: 999px;
-      font-weight: 700;
-      cursor: pointer;
-    }
+.stat-small {
+color: #777;
+font-size: 12px;
+margin-top: 7px;
+}
 
-    .table-wrapper {
-      overflow-x: auto;
-    }
+/* CHART */
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+.chart-panel {
+background: #111;
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 20px;
+padding: 25px;
+margin-bottom: 20px;
+}
 
-    th,
-    td {
-      padding: 17px 25px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
+.chart-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 25px;
+}
 
-    th {
-      color: var(--muted);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+.chart-header h2 {
+font-size: 20px;
+}
 
-    td {
-      color: #ddd;
-    }
+.chart-header span {
+color: #777;
+font-size: 13px;
+}
 
-    .empty {
-      text-align: center;
-      color: #777;
-      padding: 50px;
-    }
+.chart {
+height: 240px;
+display: flex;
+align-items: flex-end;
+gap: 10px;
+padding-top: 20px;
+}
 
-    .status {
-      margin-top: 20px;
-      color: var(--muted);
-      font-size: 14px;
-    }
+.bar-container {
+flex: 1;
+height: 100%;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+align-items: center;
+gap: 8px;
+}
 
-    @media (max-width: 750px) {
-      .stats {
-        grid-template-columns: 1fr;
-      }
+.bar {
+width: 100%;
+max-width: 55px;
+min-height: 3px;
+background: #ff4b32;
+border-radius: 7px 7px 2px 2px;
+transition: height 0.5s ease;
+position: relative;
+}
 
-      header {
-        padding: 18px 5%;
-      }
+.bar:hover {
+opacity: 0.8;
+}
 
-      main {
-        padding: 40px 5%;
-      }
+.bar-value {
+color: #aaa;
+font-size: 11px;
+}
 
-      th,
-      td {
-        padding: 14px;
-      }
+.bar-label {
+color: #666;
+font-size: 11px;
+}
 
-      .login-box {
-        padding: 30px;
-      }
-    }
-  </style>
+/* WAITLIST */
+
+.panel {
+background: #111;
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 20px;
+overflow: hidden;
+}
+
+.panel-header {
+padding: 22px 25px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.panel-header h2 {
+font-size: 20px;
+}
+
+.panel-actions {
+display: flex;
+gap: 8px;
+}
+
+.refresh {
+border: none;
+background: white;
+color: black;
+padding: 9px 16px;
+border-radius: 999px;
+font-weight: 700;
+cursor: pointer;
+}
+
+.table-wrapper {
+overflow-x: auto;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+}
+
+th,
+td {
+padding: 17px 25px;
+text-align: left;
+border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+th {
+color: #999;
+font-size: 13px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+td {
+color: #ddd;
+}
+
+.empty {
+text-align: center;
+color: #777;
+padding: 50px;
+}
+
+.status {
+margin-top: 20px;
+color: #777;
+font-size: 13px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 950px) {
+.stats {
+grid-template-columns: repeat(2, 1fr);
+}
+}
+
+@media (max-width: 650px) {
+
+.stats {
+grid-template-columns: 1fr;
+}
+
+main {
+padding: 40px 5%;
+}
+
+header {
+padding: 18px 5%;
+}
+
+.admin-label {
+display: none;
+}
+
+.chart {
+gap: 4px;
+}
+
+th,
+td {
+padding: 14px;
+}
+}
+</style>
 </head>
 
 <body>
 
-  <!-- LOGIN SCREEN -->
+<!-- ========================================================= -->
+<!-- LOGIN -->
+<!-- ========================================================= -->
 
-  <div id="loginScreen">
+<section id="loginScreen">
 
-    <div class="login-box">
+<div class="login-box">
 
-      <div class="logo">VEYRO</div>
+<div class="login-logo">
+VEYRO
+</div>
 
-      <h1>Admin.</h1>
+<h1>Admin.</h1>
 
-      <p>
-        Sign in to manage the Veyro One waitlist.
-      </p>
+<p>
+Sign in to access the Veyro dashboard.
+</p>
 
-      <form id="loginForm">
+<form id="loginForm">
 
-        <input
-          type="email"
-          id="loginEmail"
-          placeholder="Admin email"
-          autocomplete="email"
-          required
-        >
+<input
+type="email"
+id="loginEmail"
+placeholder="Admin email"
+required
+>
 
-        <input
-          type="password"
-          id="loginPassword"
-          placeholder="Password"
-          autocomplete="current-password"
-          required
-        >
+<input
+type="password"
+id="loginPassword"
+placeholder="Password"
+required
+>
 
-        <button
-          type="submit"
-          class="login-button"
-          id="loginButton"
-        >
-          Sign In
-        </button>
+<button
+type="submit"
+class="login-button"
+id="loginButton"
+>
+Sign In
+</button>
 
-      </form>
+</form>
 
-      <div class="error" id="loginError"></div>
+<div
+class="login-message"
+id="loginMessage"
+></div>
 
-    </div>
+</div>
 
-  </div>
+</section>
 
 
-  <!-- DASHBOARD -->
+<!-- ========================================================= -->
+<!-- DASHBOARD -->
+<!-- ========================================================= -->
 
-  <div id="dashboard">
+<div id="dashboard">
 
-    <header>
+<header>
 
-      <div class="header-left">
+<div class="logo">
+VEYRO
+</div>
 
-        <div class="logo">
-          VEYRO
-        </div>
+<div class="header-right">
 
-        <div class="admin-label">
-          ADMIN DASHBOARD
-        </div>
+<div class="admin-label">
+ADMIN DASHBOARD
+</div>
 
-      </div>
+<button
+class="logout"
+onclick="logout()"
+>
+Logout
+</button>
 
-      <button class="logout" id="logoutButton">
-        Log Out
-      </button>
+</div>
 
-    </header>
+</header>
 
 
-    <main>
+<main>
 
-      <h2>Dashboard.</h2>
+<div class="eyebrow">
+Veyro One
+</div>
 
-      <p class="subtitle">
-        Veyro One waitlist overview.
-      </p>
+<h1>
+Dashboard.
+</h1>
 
+<p class="subtitle">
+Veyro One waitlist and customer overview.
+</p>
 
-      <!-- STATS -->
 
-      <div class="stats">
+<!-- STATS -->
 
-        <div class="stat">
+<div class="stats">
 
-          <div class="stat-label">
-            TOTAL SIGNUPS
-          </div>
+<div class="stat">
 
-          <div
-            class="stat-value"
-            id="totalSignups"
-          >
-            —
-          </div>
+<div class="stat-label">
+TOTAL SIGNUPS
+</div>
 
-        </div>
+<div
+class="stat-value"
+id="totalSignups"
+>
+—
+</div>
 
+<div class="stat-small">
+All time
+</div>
 
-        <div class="stat">
+</div>
 
-          <div class="stat-label">
-            TODAY
-          </div>
 
-          <div
-            class="stat-value"
-            id="todaySignups"
-          >
-            —
-          </div>
+<div class="stat">
 
-        </div>
+<div class="stat-label">
+TODAY
+</div>
 
+<div
+class="stat-value"
+id="todaySignups"
+>
+—
+</div>
 
-        <div class="stat">
+<div class="stat-small">
+New today
+</div>
 
-          <div class="stat-label">
-            LATEST SIGNUP
-          </div>
+</div>
 
-          <div
-            class="stat-value"
-            id="latestSignup"
-          >
-            —
-          </div>
 
-        </div>
+<div class="stat">
 
-      </div>
+<div class="stat-label">
+THIS WEEK
+</div>
 
+<div
+class="stat-value"
+id="weekSignups"
+>
+—
+</div>
 
-      <!-- WAITLIST -->
+<div class="stat-small">
+Last 7 days
+</div>
 
-      <div class="panel">
+</div>
 
-        <div class="panel-header">
 
-          <h3>
-            Waitlist
-          </h3>
+<div class="stat">
 
-          <button
-            class="refresh"
-            id="refreshButton"
-          >
-            Refresh
-          </button>
+<div class="stat-label">
+THIS MONTH
+</div>
 
-        </div>
+<div
+class="stat-value"
+id="monthSignups"
+>
+—
+</div>
 
+<div class="stat-small">
+Current month
+</div>
 
-        <div class="table-wrapper">
+</div>
 
-          <table>
+</div>
 
-            <thead>
 
-              <tr>
-                <th>ID</th>
-                <th>Email</th>
-                <th>Joined</th>
-              </tr>
+<!-- LATEST SIGNUP -->
 
-            </thead>
+<div class="stat" style="margin-bottom:20px;">
 
-            <tbody id="waitlistBody">
+<div class="stat-label">
+LATEST SIGNUP
+</div>
 
-              <tr>
-                <td
-                  colspan="3"
-                  class="empty"
-                >
-                  Loading...
-                </td>
-              </tr>
+<div
+class="stat-value"
+id="latestSignup"
+>
+—
+</div>
 
-            </tbody>
+</div>
 
-          </table>
 
-        </div>
+<!-- CHART -->
 
-      </div>
+<div class="chart-panel">
 
+<div class="chart-header">
 
-      <div
-        class="status"
-        id="status"
-      >
-        Connecting...
-      </div>
+<h2>
+Signup activity
+</h2>
 
-    </main>
+<span>
+Last 7 days
+</span>
 
-  </div>
+</div>
 
+<div
+class="chart"
+id="chart"
+></div>
 
-  <!-- SUPABASE -->
+</div>
 
-  <script>
 
-    const SUPABASE_URL =
-      "https://vltduiizkbzuupeyjdms.supabase.co";
+<!-- WAITLIST -->
 
-    const SUPABASE_ANON_KEY =
-      "sb_publishable_RZSnpBfbRIwQju3yqJl3eQ_ZugOxIdJ";
+<div class="panel">
 
+<div class="panel-header">
 
-    /*
-      SUPABASE AUTH
-    */
+<h2>
+Waitlist
+</h2>
 
-    async function supabaseRequest(
-      endpoint,
-      options = {}
-    ) {
+<div class="panel-actions">
 
-      const response = await fetch(
-        `${SUPABASE_URL}${endpoint}`,
-        {
-          ...options,
+<button
+class="refresh"
+onclick="loadWaitlist()"
+>
+Refresh
+</button>
 
-          headers: {
-            "Content-Type": "application/json",
+</div>
 
-            "apikey":
-              SUPABASE_ANON_KEY,
+</div>
 
-            ...options.headers
-          }
-        }
-      );
 
-      return response;
-    }
+<div class="table-wrapper">
 
+<table>
 
-    /*
-      LOGIN
-    */
+<thead>
 
-    const loginForm =
-      document.getElementById("loginForm");
+<tr>
+<th>ID</th>
+<th>Email</th>
+<th>Joined</th>
+</tr>
 
-    const loginButton =
-      document.getElementById("loginButton");
+</thead>
 
-    const loginError =
-      document.getElementById("loginError");
 
+<tbody id="waitlistBody">
 
-    loginForm.addEventListener(
-      "submit",
-      async function(event) {
+<tr>
 
-        event.preventDefault();
+<td
+colspan="3"
+class="empty"
+>
+Loading...
+</td>
 
-        const email =
-          document
-            .getElementById("loginEmail")
-            .value
-            .trim();
+</tr>
 
-        const password =
-          document
-            .getElementById("loginPassword")
-            .value;
+</tbody>
 
+</table>
 
-        loginButton.disabled = true;
-        loginButton.textContent = "Signing In...";
-        loginError.textContent = "";
+</div>
 
+</div>
 
-        try {
 
-          const response =
-            await supabaseRequest(
-              "/auth/v1/token?grant_type=password",
-              {
-                method: "POST",
+<div
+class="status"
+id="status"
+>
+Connecting...
+</div>
 
-                body: JSON.stringify({
-                  email: email,
-                  password: password
-                })
-              }
-            );
+</main>
 
+</div>
 
-          const data =
-            await response.json();
 
+<script>
 
-          if (!response.ok) {
+/* ========================================================= */
+/* SUPABASE */
+/* ========================================================= */
 
-            throw new Error(
-              data.error_description ||
-              data.msg ||
-              "Login failed."
-            );
+const SUPABASE_URL =
+"https://vltduiizkbzuupeyjdms.supabase.co";
 
-          }
+const SUPABASE_ANON_KEY =
+  "YOUR_PUBLISHABLE_KEY_HERE";
+  "sb_publishable_RZSnpBfbRIwQju3yqJl3eQ_ZugOxIdJ";
 
 
-          /*
-            Save the access token temporarily.
-          */
+/* ========================================================= */
+/* LOGIN */
+/* ========================================================= */
 
-          localStorage.setItem(
-            "veyro_access_token",
-            data.access_token
-          );
+const loginForm =
+document.getElementById("loginForm");
 
-          localStorage.setItem(
-            "veyro_refresh_token",
-            data.refresh_token
-          );
+loginForm.addEventListener(
+"submit",
+async function(event) {
 
+event.preventDefault();
 
-          showDashboard();
+const email =
+document.getElementById("loginEmail")
+.value.trim();
 
-        }
+const password =
+document.getElementById("loginPassword")
+.value;
 
-        catch(error) {
+const button =
+document.getElementById("loginButton");
 
-          console.error(error);
+const message =
+document.getElementById("loginMessage");
 
-          loginError.textContent =
-            error.message ||
-            "Could not sign in.";
+button.disabled = true;
+button.textContent = "Signing in...";
+message.textContent = "";
 
-        }
+try {
 
-        finally {
+const response = await fetch(
+`${SUPABASE_URL}/auth/v1/token?grant_type=password`,
+{
+method: "POST",
 
-          loginButton.disabled = false;
-          loginButton.textContent = "Sign In";
+headers: {
+"Content-Type": "application/json",
+"apikey": SUPABASE_ANON_KEY
+},
 
-        }
+body: JSON.stringify({
+email: email,
+password: password
+})
+}
+);
 
-      }
-    );
+const data =
+await response.json();
 
+if (!response.ok) {
 
-    /*
-      SHOW DASHBOARD
-    */
+throw new Error(
+data.error_description ||
+data.msg ||
+"Login failed"
+);
 
-    function showDashboard() {
+}
 
-      document.getElementById(
-        "loginScreen"
-      ).style.display = "none";
+localStorage.setItem(
+"veyro_access_token",
+data.access_token
+);
 
+localStorage.setItem(
+"veyro_refresh_token",
+data.refresh_token
+);
 
-      document.getElementById(
-        "dashboard"
-      ).style.display = "block";
+showDashboard();
 
+} catch (error) {
 
-      loadWaitlist();
+console.error(error);
 
-    }
+message.textContent =
+"Incorrect email or password.";
 
+} finally {
 
-    /*
-      CHECK EXISTING LOGIN
-    */
+button.disabled = false;
+button.textContent = "Sign In";
 
-    const savedToken =
-      localStorage.getItem(
-        "veyro_access_token"
-      );
+}
 
+}
+);
 
-    if (savedToken) {
 
-      showDashboard();
+/* ========================================================= */
+/* SHOW DASHBOARD */
+/* ========================================================= */
 
-    }
+function showDashboard() {
 
+document.getElementById("loginScreen")
+.classList.add("hidden");
 
-    /*
-      LOAD WAITLIST
-    */
+document.getElementById("dashboard")
+.style.display = "block";
 
-    async function loadWaitlist() {
+loadWaitlist();
 
-      const body =
-        document.getElementById(
-          "waitlistBody"
-        );
+}
 
-      const status =
-        document.getElementById(
-          "status"
-        );
 
+/* ========================================================= */
+/* LOAD WAITLIST */
+/* ========================================================= */
 
-      status.textContent =
-        "Loading waitlist...";
+async function loadWaitlist() {
 
+const body =
+document.getElementById("waitlistBody");
 
-      try {
+const status =
+document.getElementById("status");
 
-        const token =
-          localStorage.getItem(
-            "veyro_access_token"
-          );
+const accessToken =
+localStorage.getItem(
+"veyro_access_token"
+);
 
+if (!accessToken) {
+return;
+}
 
-        if (!token) {
+status.textContent =
+"Loading...";
 
-          throw new Error(
-            "Not logged in."
-          );
 
-        }
+try {
 
+const response = await fetch(
+`${SUPABASE_URL}/rest/v1/waitlist?select=id,email,created_at&order=created_at.desc`,
+{
+method: "GET",
 
-        const response =
-          await fetch(
-            `${SUPABASE_URL}/rest/v1/waitlist?select=id,email,created_at&order=created_at.desc`,
-            {
-              method: "GET",
+headers: {
 
-              headers: {
+"apikey":
+SUPABASE_ANON_KEY,
 
-                "apikey":
-                  SUPABASE_ANON_KEY,
+"Authorization":
+`Bearer ${accessToken}`
 
-                "Authorization":
-                  `Bearer ${token}`
+}
 
-              }
-            }
-          );
+}
+);
 
 
-        const data =
-          await response.json();
+if (!response.ok) {
 
+const error =
+await response.text();
 
-        if (!response.ok) {
+console.error(error);
 
-          console.error(
-            "Supabase error:",
-            data
-          );
+throw new Error(error);
 
-          throw new Error(
-            data.message ||
-            "Could not load waitlist."
-          );
+}
 
-        }
 
+const data =
+await response.json();
 
-        /*
-          TOTAL
-        */
 
-        document.getElementById(
-          "totalSignups"
-        ).textContent =
-          data.length;
+/* TOTAL */
 
+document.getElementById(
+"totalSignups"
+).textContent =
+data.length;
 
-        /*
-          TODAY
-        */
 
-        const today =
-          new Date()
-            .toISOString()
-            .slice(0, 10);
+/* TODAY */
 
+const now =
+new Date();
 
-        const todayCount =
-          data.filter(row => {
+const today =
+now.toISOString()
+.slice(0, 10);
 
-            return row.created_at
-              .slice(0, 10) === today;
 
-          }).length;
+const todayCount =
+data.filter(row => {
 
+return row.created_at
+.slice(0, 10) === today;
 
-        document.getElementById(
-          "todaySignups"
-        ).textContent =
-          todayCount;
+}).length;
 
 
-        /*
-          LATEST
-        */
+document.getElementById(
+"todaySignups"
+).textContent =
+todayCount;
 
-        if (data.length > 0) {
 
-          const latest =
-            new Date(
-              data[0].created_at
-            );
+/* WEEK */
 
+const sevenDaysAgo =
+new Date();
 
-          document.getElementById(
-            "latestSignup"
-          ).textContent =
-            latest.toLocaleDateString();
+sevenDaysAgo.setDate(
+sevenDaysAgo.getDate() - 6
+);
 
-        }
+sevenDaysAgo.setHours(
+0, 0, 0, 0
+);
 
-        else {
 
-          document.getElementById(
-            "latestSignup"
-          ).textContent =
-            "None";
+const weekCount =
+data.filter(row => {
 
-        }
+return new Date(
+row.created_at
+) >= sevenDaysAgo;
 
+}).length;
 
-        /*
-          TABLE
-        */
 
-        if (data.length === 0) {
+document.getElementById(
+"weekSignups"
+).textContent =
+weekCount;
 
-          body.innerHTML = `
-            <tr>
-              <td
-                colspan="3"
-                class="empty"
-              >
-                No waitlist signups yet.
-              </td>
-            </tr>
-          `;
 
-        }
+/* MONTH */
 
-        else {
+const monthStart =
+new Date(
+now.getFullYear(),
+now.getMonth(),
+1
+);
 
-          body.innerHTML =
-            data.map(row => {
 
-              const date =
-                new Date(
-                  row.created_at
-                );
+const monthCount =
+data.filter(row => {
 
+return new Date(
+row.created_at
+) >= monthStart;
 
-              return `
-                <tr>
+}).length;
 
-                  <td>
-                    ${escapeHtml(row.id)}
-                  </td>
 
-                  <td>
-                    ${escapeHtml(row.email)}
-                  </td>
+document.getElementById(
+"monthSignups"
+).textContent =
+monthCount;
 
-                  <td>
-                    ${escapeHtml(
-                      date.toLocaleString()
-                    )}
-                  </td>
 
-                </tr>
-              `;
+/* LATEST */
 
-            }).join("");
+if (data.length > 0) {
 
-        }
+const latestDate =
+new Date(
+data[0].created_at
+);
 
 
-        status.textContent =
-          `Connected • ${data.length} signup${
-            data.length === 1
-              ? ""
-              : "s"
-          }`;
+document.getElementById(
+"latestSignup"
+).textContent =
+latestDate.toLocaleString();
 
-      }
+} else {
 
-      catch(error) {
+document.getElementById(
+"latestSignup"
+).textContent =
+"None";
 
-        console.error(error);
+}
 
 
-        body.innerHTML = `
-          <tr>
-            <td
-              colspan="3"
-              class="empty"
-            >
-              Could not load waitlist.
-            </td>
-          </tr>
-        `;
+/* TABLE */
 
+if (data.length === 0) {
 
-        status.textContent =
-          "Database connection failed.";
+body.innerHTML = `
+       <tr>
+         <td
+           colspan="3"
+           class="empty"
+         >
+           No waitlist signups yet.
+         </td>
+       </tr>
+     `;
 
-      }
+} else {
 
-    }
+body.innerHTML =
+data.map(row => {
 
+const date =
+new Date(
+row.created_at
+);
 
-    /*
-      HTML ESCAPING
-    */
 
-    function escapeHtml(value) {
+return `
+           <tr>
+             <td>
+               ${row.id}
+             </td>
 
-      return String(value)
+             <td>
+               ${escapeHtml(row.email)}
+             </td>
 
-        .replaceAll(
-          "&",
-          "&amp;"
-        )
+             <td>
+               ${date.toLocaleString()}
+             </td>
+           </tr>
+         `;
 
-        .replaceAll(
-          "<",
-          "&lt;"
-        )
+}).join("");
 
-        .replaceAll(
-          ">",
-          "&gt;"
-        )
+}
 
-        .replaceAll(
-          '"',
-          "&quot;"
-        )
 
-        .replaceAll(
-          "'",
-          "&#039;"
-        );
+/* CHART */
 
-    }
+createChart(data);
 
 
-    /*
-      REFRESH
-    */
+status.textContent =
+`Connected • ${data.length} signup${data.length === 1 ? "" : "s"}`;
 
-    document
-      .getElementById(
-        "refreshButton"
-      )
-      .addEventListener(
-        "click",
-        loadWaitlist
-      );
 
+} catch (error) {
 
-    /*
-      LOG OUT
-    */
+console.error(error);
 
-    document
-      .getElementById(
-        "logoutButton"
-      )
-      .addEventListener(
-        "click",
-        function() {
 
-          localStorage.removeItem(
-            "veyro_access_token"
-          );
+body.innerHTML = `
+     <tr>
+       <td
+         colspan="3"
+         class="empty"
+       >
+         Could not load waitlist.
+       </td>
+     </tr>
+   `;
 
-          localStorage.removeItem(
-            "veyro_refresh_token"
-          );
 
+status.textContent =
+"Database connection failed.";
 
-          document.getElementById(
-            "dashboard"
-          ).style.display =
-            "none";
+}
 
+}
 
-          document.getElementById(
-            "loginScreen"
-          ).style.display =
-            "flex";
 
-        }
-      );
+/* ========================================================= */
+/* CHART */
+/* ========================================================= */
 
-  </script>
+function createChart(data) {
+
+const chart =
+document.getElementById("chart");
+
+chart.innerHTML = "";
+
+
+const days = [];
+
+
+for (
+let i = 6;
+i >= 0;
+i--
+) {
+
+const date =
+new Date();
+
+date.setDate(
+date.getDate() - i
+);
+
+date.setHours(
+0, 0, 0, 0
+);
+
+days.push(date);
+
+}
+
+
+const counts =
+days.map(day => {
+
+const next =
+new Date(day);
+
+next.setDate(
+next.getDate() + 1
+);
+
+
+return data.filter(row => {
+
+const signup =
+new Date(
+row.created_at
+);
+
+return signup >= day &&
+signup < next;
+
+}).length;
+
+});
+
+
+const max =
+Math.max(
+...counts,
+1
+);
+
+
+days.forEach(
+(day, index) => {
+
+const container =
+document.createElement(
+"div"
+);
+
+container.className =
+"bar-container";
+
+
+const value =
+document.createElement(
+"div"
+);
+
+value.className =
+"bar-value";
+
+value.textContent =
+counts[index];
+
+
+const bar =
+document.createElement(
+"div"
+);
+
+bar.className =
+"bar";
+
+bar.style.height =
+`${Math.max(
+         (counts[index] / max) * 180,
+         3
+       )}px`;
+
+
+const label =
+document.createElement(
+"div"
+);
+
+label.className =
+"bar-label";
+
+label.textContent =
+day.toLocaleDateString(
+undefined,
+{
+weekday: "short"
+}
+);
+
+
+container.appendChild(
+value
+);
+
+container.appendChild(
+bar
+);
+
+container.appendChild(
+label
+);
+
+
+chart.appendChild(
+container
+);
+
+}
+);
+
+}
+
+
+/* ========================================================= */
+/* SECURITY */
+/* ========================================================= */
+
+function escapeHtml(value) {
+
+return String(value)
+
+.replaceAll(
+"&",
+"&amp;"
+)
+
+.replaceAll(
+"<",
+"&lt;"
+)
+
+.replaceAll(
+">",
+"&gt;"
+)
+
+.replaceAll(
+'"',
+"&quot;"
+)
+
+.replaceAll(
+"'",
+"&#039;"
+);
+
+}
+
+
+/* ========================================================= */
+/* LOGOUT */
+/* ========================================================= */
+
+function logout() {
+
+localStorage.removeItem(
+"veyro_access_token"
+);
+
+localStorage.removeItem(
+"veyro_refresh_token"
+);
+
+location.reload();
+
+}
+
+
+/* ========================================================= */
+/* EXISTING LOGIN */
+/* ========================================================= */
+
+if (
+localStorage.getItem(
+"veyro_access_token"
+)
+) {
+
+showDashboard();
+
+}
+
+</script>
 
 </body>
 </html>
-```
