@@ -24,25 +24,6 @@
       display: none !important;
     }
 
-    header {
-      padding: 25px 6%;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-weight: 900;
-      letter-spacing: 4px;
-      font-size: 22px;
-    }
-
-    .admin-label {
-      color: #999;
-      font-size: 14px;
-    }
-
     /* LOGIN */
 
     #loginScreen {
@@ -62,8 +43,15 @@
       padding: 40px;
     }
 
+    .login-logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      margin-bottom: 35px;
+    }
+
     .login-box h1 {
-      font-size: 42px;
+      font-size: 48px;
       letter-spacing: -3px;
       margin-bottom: 10px;
     }
@@ -111,33 +99,40 @@
       font-size: 14px;
     }
 
-    /* DASHBOARD */
+    /* HEADER */
 
     #dashboard {
       display: none;
     }
 
-    main {
-      max-width: 1200px;
-      margin: auto;
-      padding: 60px 6%;
-    }
-
-    h1 {
-      font-size: clamp(40px, 6vw, 70px);
-      letter-spacing: -4px;
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      color: #999;
-      margin-bottom: 45px;
-    }
-
-    .dashboard-actions {
+    header {
+      padding: 22px 6%;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
       display: flex;
-      gap: 10px;
+      justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(7,7,7,0.85);
+      backdrop-filter: blur(15px);
+    }
+
+    .logo {
+      font-weight: 900;
+      letter-spacing: 4px;
+      font-size: 22px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .admin-label {
+      color: #999;
+      font-size: 13px;
     }
 
     .logout {
@@ -150,30 +145,137 @@
       cursor: pointer;
     }
 
+    /* MAIN */
+
+    main {
+      max-width: 1250px;
+      margin: auto;
+      padding: 60px 6%;
+    }
+
+    .eyebrow {
+      color: #ff4b32;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: clamp(45px, 6vw, 75px);
+      letter-spacing: -4px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #999;
+      margin-bottom: 45px;
+    }
+
+    /* STATS */
+
     .stats {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
     }
 
     .stat {
       background: #111;
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 20px;
-      padding: 28px;
+      padding: 25px;
     }
 
     .stat-label {
       color: #999;
-      font-size: 14px;
+      font-size: 12px;
+      letter-spacing: 1px;
       margin-bottom: 12px;
     }
 
     .stat-value {
-      font-size: 42px;
+      font-size: 36px;
       font-weight: 800;
     }
+
+    .stat-small {
+      color: #777;
+      font-size: 12px;
+      margin-top: 7px;
+    }
+
+    /* CHART */
+
+    .chart-panel {
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .chart-header h2 {
+      font-size: 20px;
+    }
+
+    .chart-header span {
+      color: #777;
+      font-size: 13px;
+    }
+
+    .chart {
+      height: 240px;
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      padding-top: 20px;
+    }
+
+    .bar-container {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bar {
+      width: 100%;
+      max-width: 55px;
+      min-height: 3px;
+      background: #ff4b32;
+      border-radius: 7px 7px 2px 2px;
+      transition: height 0.5s ease;
+      position: relative;
+    }
+
+    .bar:hover {
+      opacity: 0.8;
+    }
+
+    .bar-value {
+      color: #aaa;
+      font-size: 11px;
+    }
+
+    .bar-label {
+      color: #666;
+      font-size: 11px;
+    }
+
+    /* WAITLIST */
 
     .panel {
       background: #111;
@@ -192,6 +294,11 @@
 
     .panel-header h2 {
       font-size: 20px;
+    }
+
+    .panel-actions {
+      display: flex;
+      gap: 8px;
     }
 
     .refresh {
@@ -239,22 +346,43 @@
 
     .status {
       margin-top: 20px;
-      color: #999;
-      font-size: 14px;
+      color: #777;
+      font-size: 13px;
     }
 
-    @media (max-width: 750px) {
+    /* RESPONSIVE */
+
+    @media (max-width: 950px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 650px) {
+
       .stats {
         grid-template-columns: 1fr;
+      }
+
+      main {
+        padding: 40px 5%;
+      }
+
+      header {
+        padding: 18px 5%;
+      }
+
+      .admin-label {
+        display: none;
+      }
+
+      .chart {
+        gap: 4px;
       }
 
       th,
       td {
         padding: 14px;
-      }
-
-      .login-box {
-        padding: 30px;
       }
     }
   </style>
@@ -262,11 +390,17 @@
 
 <body>
 
+<!-- ========================================================= -->
 <!-- LOGIN -->
+<!-- ========================================================= -->
 
 <section id="loginScreen">
 
   <div class="login-box">
+
+    <div class="login-logo">
+      VEYRO
+    </div>
 
     <h1>Admin.</h1>
 
@@ -310,7 +444,9 @@
 </section>
 
 
+<!-- ========================================================= -->
 <!-- DASHBOARD -->
+<!-- ========================================================= -->
 
 <div id="dashboard">
 
@@ -320,7 +456,7 @@
       VEYRO
     </div>
 
-    <div class="dashboard-actions">
+    <div class="header-right">
 
       <div class="admin-label">
         ADMIN DASHBOARD
@@ -340,12 +476,20 @@
 
   <main>
 
-    <h1>Dashboard.</h1>
+    <div class="eyebrow">
+      Veyro One
+    </div>
+
+    <h1>
+      Dashboard.
+    </h1>
 
     <p class="subtitle">
       Veyro One waitlist and customer overview.
     </p>
 
+
+    <!-- STATS -->
 
     <div class="stats">
 
@@ -360,6 +504,10 @@
           id="totalSignups"
         >
           —
+        </div>
+
+        <div class="stat-small">
+          All time
         </div>
 
       </div>
@@ -378,26 +526,98 @@
           —
         </div>
 
+        <div class="stat-small">
+          New today
+        </div>
+
       </div>
 
 
       <div class="stat">
 
         <div class="stat-label">
-          LATEST SIGNUP
+          THIS WEEK
         </div>
 
         <div
           class="stat-value"
-          id="latestSignup"
+          id="weekSignups"
         >
           —
+        </div>
+
+        <div class="stat-small">
+          Last 7 days
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-label">
+          THIS MONTH
+        </div>
+
+        <div
+          class="stat-value"
+          id="monthSignups"
+        >
+          —
+        </div>
+
+        <div class="stat-small">
+          Current month
         </div>
 
       </div>
 
     </div>
 
+
+    <!-- LATEST SIGNUP -->
+
+    <div class="stat" style="margin-bottom:20px;">
+
+      <div class="stat-label">
+        LATEST SIGNUP
+      </div>
+
+      <div
+        class="stat-value"
+        id="latestSignup"
+      >
+        —
+      </div>
+
+    </div>
+
+
+    <!-- CHART -->
+
+    <div class="chart-panel">
+
+      <div class="chart-header">
+
+        <h2>
+          Signup activity
+        </h2>
+
+        <span>
+          Last 7 days
+        </span>
+
+      </div>
+
+      <div
+        class="chart"
+        id="chart"
+      ></div>
+
+    </div>
+
+
+    <!-- WAITLIST -->
 
     <div class="panel">
 
@@ -407,12 +627,16 @@
           Waitlist
         </h2>
 
-        <button
-          class="refresh"
-          onclick="loadWaitlist()"
-        >
-          Refresh
-        </button>
+        <div class="panel-actions">
+
+          <button
+            class="refresh"
+            onclick="loadWaitlist()"
+          >
+            Refresh
+          </button>
+
+        </div>
 
       </div>
 
@@ -468,14 +692,20 @@
 
 <script>
 
+/* ========================================================= */
+/* SUPABASE */
+/* ========================================================= */
+
 const SUPABASE_URL =
   "https://vltduiizkbzuupeyjdms.supabase.co";
 
 const SUPABASE_ANON_KEY =
-  "sb_publishable_RZSnpBfbRIwQju3yqJl3eQ_ZugOxIdJ";
+  "YOUR_PUBLISHABLE_KEY_HERE";
 
 
+/* ========================================================= */
 /* LOGIN */
+/* ========================================================= */
 
 const loginForm =
   document.getElementById("loginForm");
@@ -487,10 +717,12 @@ loginForm.addEventListener(
     event.preventDefault();
 
     const email =
-      document.getElementById("loginEmail").value.trim();
+      document.getElementById("loginEmail")
+        .value.trim();
 
     const password =
-      document.getElementById("loginPassword").value;
+      document.getElementById("loginPassword")
+        .value;
 
     const button =
       document.getElementById("loginButton");
@@ -521,14 +753,17 @@ loginForm.addEventListener(
         }
       );
 
-      const data = await response.json();
+      const data =
+        await response.json();
 
       if (!response.ok) {
+
         throw new Error(
           data.error_description ||
           data.msg ||
           "Login failed"
         );
+
       }
 
       localStorage.setItem(
@@ -561,7 +796,9 @@ loginForm.addEventListener(
 );
 
 
+/* ========================================================= */
 /* SHOW DASHBOARD */
+/* ========================================================= */
 
 function showDashboard() {
 
@@ -576,7 +813,9 @@ function showDashboard() {
 }
 
 
+/* ========================================================= */
 /* LOAD WAITLIST */
+/* ========================================================= */
 
 async function loadWaitlist() {
 
@@ -587,7 +826,9 @@ async function loadWaitlist() {
     document.getElementById("status");
 
   const accessToken =
-    localStorage.getItem("veyro_access_token");
+    localStorage.getItem(
+      "veyro_access_token"
+    );
 
   if (!accessToken) {
     return;
@@ -595,6 +836,7 @@ async function loadWaitlist() {
 
   status.textContent =
     "Loading...";
+
 
   try {
 
@@ -604,12 +846,18 @@ async function loadWaitlist() {
         method: "GET",
 
         headers: {
-          "apikey": SUPABASE_ANON_KEY,
+
+          "apikey":
+            SUPABASE_ANON_KEY,
+
           "Authorization":
             `Bearer ${accessToken}`
+
         }
+
       }
     );
+
 
     if (!response.ok) {
 
@@ -622,57 +870,135 @@ async function loadWaitlist() {
 
     }
 
+
     const data =
       await response.json();
 
 
+    /* TOTAL */
+
     document.getElementById(
       "totalSignups"
-    ).textContent = data.length;
+    ).textContent =
+      data.length;
 
+
+    /* TODAY */
+
+    const now =
+      new Date();
 
     const today =
-      new Date().toISOString().slice(0, 10);
+      now.toISOString()
+        .slice(0, 10);
 
 
     const todayCount =
       data.filter(row => {
 
-        return row.created_at.slice(0, 10)
-          === today;
+        return row.created_at
+          .slice(0, 10) === today;
 
       }).length;
 
 
     document.getElementById(
       "todaySignups"
-    ).textContent = todayCount;
+    ).textContent =
+      todayCount;
 
+
+    /* WEEK */
+
+    const sevenDaysAgo =
+      new Date();
+
+    sevenDaysAgo.setDate(
+      sevenDaysAgo.getDate() - 6
+    );
+
+    sevenDaysAgo.setHours(
+      0, 0, 0, 0
+    );
+
+
+    const weekCount =
+      data.filter(row => {
+
+        return new Date(
+          row.created_at
+        ) >= sevenDaysAgo;
+
+      }).length;
+
+
+    document.getElementById(
+      "weekSignups"
+    ).textContent =
+      weekCount;
+
+
+    /* MONTH */
+
+    const monthStart =
+      new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        1
+      );
+
+
+    const monthCount =
+      data.filter(row => {
+
+        return new Date(
+          row.created_at
+        ) >= monthStart;
+
+      }).length;
+
+
+    document.getElementById(
+      "monthSignups"
+    ).textContent =
+      monthCount;
+
+
+    /* LATEST */
 
     if (data.length > 0) {
 
       const latestDate =
-        new Date(data[0].created_at);
+        new Date(
+          data[0].created_at
+        );
+
 
       document.getElementById(
         "latestSignup"
       ).textContent =
-        latestDate.toLocaleDateString();
+        latestDate.toLocaleString();
 
     } else {
 
       document.getElementById(
         "latestSignup"
-      ).textContent = "None";
+      ).textContent =
+        "None";
 
     }
 
+
+    /* TABLE */
 
     if (data.length === 0) {
 
       body.innerHTML = `
         <tr>
-          <td colspan="3" class="empty">
+          <td
+            colspan="3"
+            class="empty"
+          >
             No waitlist signups yet.
           </td>
         </tr>
@@ -684,13 +1010,24 @@ async function loadWaitlist() {
         data.map(row => {
 
           const date =
-            new Date(row.created_at);
+            new Date(
+              row.created_at
+            );
+
 
           return `
             <tr>
-              <td>${row.id}</td>
-              <td>${escapeHtml(row.email)}</td>
-              <td>${date.toLocaleString()}</td>
+              <td>
+                ${row.id}
+              </td>
+
+              <td>
+                ${escapeHtml(row.email)}
+              </td>
+
+              <td>
+                ${date.toLocaleString()}
+              </td>
             </tr>
           `;
 
@@ -699,44 +1036,228 @@ async function loadWaitlist() {
     }
 
 
+    /* CHART */
+
+    createChart(data);
+
+
     status.textContent =
       `Connected • ${data.length} signup${data.length === 1 ? "" : "s"}`;
+
 
   } catch (error) {
 
     console.error(error);
 
+
     body.innerHTML = `
       <tr>
-        <td colspan="3" class="empty">
+        <td
+          colspan="3"
+          class="empty"
+        >
           Could not load waitlist.
         </td>
       </tr>
     `;
 
+
     status.textContent =
-      "You are logged in, but the database still needs the admin read permission.";
+      "Database connection failed.";
 
   }
 
 }
 
 
-/* ESCAPE HTML */
+/* ========================================================= */
+/* CHART */
+/* ========================================================= */
 
-function escapeHtml(value) {
+function createChart(data) {
 
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+  const chart =
+    document.getElementById("chart");
+
+  chart.innerHTML = "";
+
+
+  const days = [];
+
+
+  for (
+    let i = 6;
+    i >= 0;
+    i--
+  ) {
+
+    const date =
+      new Date();
+
+    date.setDate(
+      date.getDate() - i
+    );
+
+    date.setHours(
+      0, 0, 0, 0
+    );
+
+    days.push(date);
+
+  }
+
+
+  const counts =
+    days.map(day => {
+
+      const next =
+        new Date(day);
+
+      next.setDate(
+        next.getDate() + 1
+      );
+
+
+      return data.filter(row => {
+
+        const signup =
+          new Date(
+            row.created_at
+          );
+
+        return signup >= day &&
+               signup < next;
+
+      }).length;
+
+    });
+
+
+  const max =
+    Math.max(
+      ...counts,
+      1
+    );
+
+
+  days.forEach(
+    (day, index) => {
+
+      const container =
+        document.createElement(
+          "div"
+        );
+
+      container.className =
+        "bar-container";
+
+
+      const value =
+        document.createElement(
+          "div"
+        );
+
+      value.className =
+        "bar-value";
+
+      value.textContent =
+        counts[index];
+
+
+      const bar =
+        document.createElement(
+          "div"
+        );
+
+      bar.className =
+        "bar";
+
+      bar.style.height =
+        `${Math.max(
+          (counts[index] / max) * 180,
+          3
+        )}px`;
+
+
+      const label =
+        document.createElement(
+          "div"
+        );
+
+      label.className =
+        "bar-label";
+
+      label.textContent =
+        day.toLocaleDateString(
+          undefined,
+          {
+            weekday: "short"
+          }
+        );
+
+
+      container.appendChild(
+        value
+      );
+
+      container.appendChild(
+        bar
+      );
+
+      container.appendChild(
+        label
+      );
+
+
+      chart.appendChild(
+        container
+      );
+
+    }
+  );
 
 }
 
 
+/* ========================================================= */
+/* SECURITY */
+/* ========================================================= */
+
+function escapeHtml(value) {
+
+  return String(value)
+
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+/* ========================================================= */
 /* LOGOUT */
+/* ========================================================= */
 
 function logout() {
 
@@ -753,7 +1274,9 @@ function logout() {
 }
 
 
-/* CHECK EXISTING LOGIN */
+/* ========================================================= */
+/* EXISTING LOGIN */
+/* ========================================================= */
 
 if (
   localStorage.getItem(
