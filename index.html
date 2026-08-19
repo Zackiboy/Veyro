@@ -46,8 +46,6 @@
       font: inherit;
     }
 
-    /* NAVIGATION */
-
     nav {
       position: fixed;
       top: 0;
@@ -88,8 +86,6 @@
       color: black;
       font-weight: 700;
     }
-
-    /* HERO */
 
     .hero {
       min-height: 100vh;
@@ -174,8 +170,6 @@
       background: var(--surface);
     }
 
-    /* TIMER PRODUCT */
-
     .product-stage {
       display: flex;
       justify-content: center;
@@ -256,8 +250,6 @@
       transform: scale(0.95);
     }
 
-    /* SECTION */
-
     section {
       padding: 120px 8%;
     }
@@ -274,8 +266,6 @@
       max-width: 650px;
       font-size: 18px;
     }
-
-    /* HOW IT WORKS */
 
     .steps {
       display: grid;
@@ -308,8 +298,6 @@
       color: var(--muted);
     }
 
-    /* FEATURES */
-
     .features-section {
       background: #0b0b0b;
     }
@@ -341,8 +329,6 @@
     .feature p {
       color: var(--muted);
     }
-
-    /* PRODUCT */
 
     .product-section {
       display: grid;
@@ -387,8 +373,6 @@
       font-size: 14px;
     }
 
-    /* ABOUT */
-
     .about {
       max-width: 900px;
       margin: auto;
@@ -400,8 +384,6 @@
       font-size: 22px;
       line-height: 1.7;
     }
-
-    /* WAITLIST */
 
     .waitlist {
       max-width: 850px;
@@ -446,8 +428,6 @@
       border-color: rgba(255,255,255,0.3);
     }
 
-    /* FAQ */
-
     .faq {
       max-width: 850px;
       margin: 55px auto 0;
@@ -470,8 +450,6 @@
       max-width: 700px;
     }
 
-    /* FOOTER */
-
     footer {
       border-top: 1px solid var(--border);
       padding: 40px 8%;
@@ -486,8 +464,6 @@
       color: white;
       letter-spacing: 3px;
     }
-
-    /* RESPONSIVE */
 
     @media (max-width: 850px) {
       .nav-links {
@@ -537,8 +513,6 @@
 
 <body>
 
-  <!-- NAVIGATION -->
-
   <nav>
     <a href="#" class="logo">VEYRO</a>
 
@@ -550,9 +524,6 @@
       <a href="#waitlist" class="nav-button">Coming Soon</a>
     </div>
   </nav>
-
-
-  <!-- HERO -->
 
   <main>
 
@@ -582,9 +553,6 @@
           </a>
         </div>
       </div>
-
-
-      <!-- PRODUCT -->
 
       <div class="product-stage">
 
@@ -627,9 +595,6 @@
 
     </section>
 
-
-    <!-- HOW IT WORKS -->
-
     <section id="how">
 
       <div class="eyebrow">Simple by design</div>
@@ -644,7 +609,6 @@
         visual representation of the time you have left.
       </p>
 
-
       <div class="steps">
 
         <div class="step">
@@ -657,7 +621,6 @@
           </p>
         </div>
 
-
         <div class="step">
           <div class="step-number">02 — START</div>
 
@@ -667,7 +630,6 @@
             Start your timer with one simple press.
           </p>
         </div>
-
 
         <div class="step">
           <div class="step-number">03 — SEE</div>
@@ -682,9 +644,6 @@
       </div>
 
     </section>
-
-
-    <!-- FEATURES -->
 
     <section class="features-section">
 
@@ -733,9 +692,6 @@
 
     </section>
 
-
-    <!-- PRODUCT -->
-
     <section id="product" class="product-section">
 
       <div class="product-stage">
@@ -777,7 +733,6 @@
 
       </div>
 
-
       <div class="product-copy">
 
         <div class="eyebrow">Veyro One</div>
@@ -793,7 +748,6 @@
           understand instantly. See your remaining time instead
           of constantly checking it.
         </p>
-
 
         <div class="specs">
 
@@ -823,9 +777,6 @@
 
     </section>
 
-
-    <!-- ABOUT -->
-
     <section id="about">
 
       <div class="about">
@@ -846,9 +797,6 @@
       </div>
 
     </section>
-
-
-    <!-- WAITLIST -->
 
     <section id="waitlist">
 
@@ -884,9 +832,6 @@
 
     </section>
 
-
-    <!-- FAQ -->
-
     <section id="faq">
 
       <div class="about">
@@ -898,7 +843,6 @@
         </h2>
 
       </div>
-
 
       <div class="faq">
 
@@ -942,9 +886,6 @@
 
   </main>
 
-
-  <!-- FOOTER -->
-
   <footer>
 
     <div>
@@ -959,14 +900,12 @@
 
   </footer>
 
-
-  <!-- JAVASCRIPT -->
-
   <script>
 
     /*
-      Veyro One demo timer
-      This is only a visual demonstration for the website.
+      ==========================================
+      VEYRO DEMO TIMER
+      ==========================================
     */
 
     const button = document.getElementById("demoButton");
@@ -993,13 +932,18 @@
     function startTimer() {
 
       if (running) {
+
         clearInterval(interval);
+
         running = false;
+
         button.textContent = "START";
+
         return;
       }
 
       running = true;
+
       button.textContent = "PAUSE";
 
       interval = setInterval(() => {
@@ -1019,7 +963,9 @@
           setTimeout(() => {
 
             remaining = 20;
+
             updateTimer();
+
             button.textContent = "START";
 
           }, 2500);
@@ -1035,66 +981,189 @@
     updateTimer();
 
 
-/*
-  Veyro Waitlist
-  Saves emails to Supabase
-*/
+    /*
+      ==========================================
+      VEYRO WAITLIST
+      ==========================================
 
-const SUPABASE_URL = "https://vltduiizkbzuupeyjdms.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_RZSnpBfbRIwQju3yqJl3eQ_ZugOxIdJ";
+      1. Save email to Supabase
+      2. Call Supabase Edge Function
+      3. Edge Function sends notification through Resend
+    */
 
-const form = document.getElementById("waitlistForm");
-const message = document.getElementById("formMessage");
+    const SUPABASE_URL =
+      "https://vltduiizkbzuupeyjdms.supabase.co";
 
-form.addEventListener("submit", async function(event) {
-  event.preventDefault();
+    const SUPABASE_ANON_KEY =
+      "sb_publishable_RZSnpBfbRIwQju3yqJl3eQ_ZugOxIdJ";
 
-  const emailInput = document.getElementById("email");
-  const email = emailInput.value.trim().toLowerCase();
+    const WAITLIST_FUNCTION_URL =
+      `${SUPABASE_URL}/functions/v1/waitlist-notification`;
 
-  if (!email) return;
+    const form =
+      document.getElementById("waitlistForm");
 
-  const submitButton = form.querySelector("button");
+    const message =
+      document.getElementById("formMessage");
 
-  submitButton.disabled = true;
-  submitButton.textContent = "Joining...";
-  message.textContent = "";
 
-  try {
-    const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/waitlist`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": SUPABASE_ANON_KEY,
-          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-          "Prefer": "return=minimal"
-        },
-        body: JSON.stringify({
-          email: email
-        })
+    form.addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+      const emailInput =
+        document.getElementById("email");
+
+      const email =
+        emailInput.value.trim().toLowerCase();
+
+      if (!email) {
+        return;
       }
-    );
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Supabase error:", errorText);
-      throw new Error(errorText);
-    }
+      const submitButton =
+        form.querySelector("button");
 
-    message.textContent = "Thanks — you're on the Veyro list! 🚀";
-    emailInput.value = "";
+      submitButton.disabled = true;
 
-  } catch (error) {
-    console.error("Veyro waitlist error:", error);
-    message.textContent = "Something went wrong. Please try again.";
+      submitButton.textContent =
+        "Joining...";
 
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = "Join Waitlist";
-  }
-});
+      message.textContent = "";
+
+      try {
+
+        /*
+          STEP 1
+          Save signup to Supabase
+        */
+
+        const response = await fetch(
+          `${SUPABASE_URL}/rest/v1/waitlist`,
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": SUPABASE_ANON_KEY,
+              "Authorization":
+                `Bearer ${SUPABASE_ANON_KEY}`,
+              "Prefer": "return=minimal"
+            },
+
+            body: JSON.stringify({
+              email: email
+            })
+          }
+        );
+
+
+        if (!response.ok) {
+
+          const errorText =
+            await response.text();
+
+          console.error(
+            "Supabase waitlist error:",
+            errorText
+          );
+
+          throw new Error(
+            "Could not save signup."
+          );
+        }
+
+
+        /*
+          STEP 2
+          Tell the Edge Function about the signup
+
+          IMPORTANT:
+          We do NOT put the Resend API key here.
+          The key stays safely inside Supabase Secrets.
+        */
+
+        try {
+
+          const notificationResponse =
+            await fetch(
+              WAITLIST_FUNCTION_URL,
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                  email: email
+                })
+              }
+            );
+
+
+          if (!notificationResponse.ok) {
+
+            const notificationError =
+              await notificationResponse.text();
+
+            console.error(
+              "Notification function error:",
+              notificationError
+            );
+
+            /*
+              The signup was already saved,
+              so don't tell the customer their signup failed.
+            */
+          }
+
+        } catch (notificationError) {
+
+          console.error(
+            "Could not contact notification function:",
+            notificationError
+          );
+
+          /*
+            Again, the signup is already safely
+            stored in Supabase.
+          */
+        }
+
+
+        /*
+          STEP 3
+          Show success
+        */
+
+        message.textContent =
+          "Thanks — you're on the Veyro list! 🚀";
+
+        emailInput.value = "";
+
+
+      } catch (error) {
+
+        console.error(
+          "Veyro waitlist error:",
+          error
+        );
+
+        message.textContent =
+          "Something went wrong. Please try again.";
+
+
+      } finally {
+
+        submitButton.disabled = false;
+
+        submitButton.textContent =
+          "Join Waitlist";
+
+      }
+
+    });
 
   </script>
 
