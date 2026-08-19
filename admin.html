@@ -15,193 +15,148 @@
 
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background: #f5f5f7;
-      color: #111;
+      background: #070707;
+      color: #f5f5f5;
+      min-height: 100vh;
     }
 
-    .sidebar {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 240px;
-      height: 100vh;
-      background: #ffffff;
-      border-right: 1px solid #ddd;
-      padding: 30px 20px;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 40px;
-    }
-
-    .logo span {
-      font-size: 12px;
-      color: #777;
-      display: block;
-      margin-top: 4px;
-      font-weight: 400;
-    }
-
-    .nav button {
-      width: 100%;
-      border: none;
-      background: transparent;
-      text-align: left;
-      padding: 13px;
-      margin-bottom: 8px;
-      border-radius: 10px;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    .nav button:hover {
-      background: #f0f0f0;
-    }
-
-    .main {
-      margin-left: 240px;
-      padding: 40px;
-    }
-
-    .top {
+    header {
+      padding: 25px 6%;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 35px;
     }
 
-    .top h1 {
-      font-size: 32px;
+    .logo {
+      font-weight: 900;
+      letter-spacing: 4px;
+      font-size: 22px;
     }
 
-    .status {
-      background: #e8f8ed;
-      color: #218838;
-      padding: 9px 14px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: bold;
+    .admin-label {
+      color: #999;
+      font-size: 14px;
     }
 
-    .cards {
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 60px 6%;
+    }
+
+    h1 {
+      font-size: clamp(40px, 6vw, 70px);
+      letter-spacing: -4px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #999;
+      margin-bottom: 45px;
+    }
+
+    .stats {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
-    .card {
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 16px;
-      padding: 24px;
+    .stat {
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 28px;
     }
 
-    .card-title {
-      color: #777;
+    .stat-label {
+      color: #999;
       font-size: 14px;
       margin-bottom: 12px;
     }
 
-    .number {
-      font-size: 32px;
+    .stat-value {
+      font-size: 42px;
       font-weight: 800;
     }
 
-    .content {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 20px;
-    }
-
     .panel {
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 16px;
-      padding: 25px;
-    }
-
-    .panel h2 {
-      font-size: 20px;
-      margin-bottom: 20px;
-    }
-
-    .chart {
-      height: 250px;
-      display: flex;
-      align-items: flex-end;
-      gap: 10px;
-      border-bottom: 1px solid #ddd;
-      padding: 10px;
-    }
-
-    .bar {
-      flex: 1;
       background: #111;
-      border-radius: 6px 6px 0 0;
-      min-height: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      overflow: hidden;
     }
 
-    .signup {
-      padding: 14px 0;
-      border-bottom: 1px solid #eee;
+    .panel-header {
+      padding: 22px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    .signup:last-child {
-      border-bottom: none;
+    .panel-header h2 {
+      font-size: 20px;
     }
 
-    .signup strong {
-      display: block;
-      margin-bottom: 4px;
+    .refresh {
+      border: none;
+      background: white;
+      color: black;
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
     }
 
-    .signup small {
-      color: #777;
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 17px 25px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    th {
+      color: #999;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    td {
+      color: #ddd;
     }
 
     .empty {
-      color: #777;
-      padding: 30px 0;
       text-align: center;
+      color: #777;
+      padding: 50px;
     }
 
-    @media (max-width: 900px) {
-      .sidebar {
-        width: 190px;
-      }
-
-      .main {
-        margin-left: 190px;
-      }
-
-      .cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .content {
-        grid-template-columns: 1fr;
-      }
+    .status {
+      margin-top: 20px;
+      color: #999;
+      font-size: 14px;
     }
 
-    @media (max-width: 600px) {
-      .sidebar {
-        position: static;
-        width: 100%;
-        height: auto;
-        border-right: none;
-        border-bottom: 1px solid #ddd;
-      }
-
-      .main {
-        margin-left: 0;
-        padding: 20px;
-      }
-
-      .cards {
+    @media (max-width: 750px) {
+      .stats {
         grid-template-columns: 1fr;
+      }
+
+      th,
+      td {
+        padding: 14px;
       }
     }
   </style>
@@ -209,185 +164,207 @@
 
 <body>
 
-  <aside class="sidebar">
+<header>
+  <div class="logo">VEYRO</div>
+  <div class="admin-label">ADMIN DASHBOARD</div>
+</header>
 
-    <div class="logo">
-      Veyro
-      <span>Admin Dashboard</span>
+<main>
+
+  <h1>Dashboard.</h1>
+
+  <p class="subtitle">
+    Veyro One waitlist and customer overview.
+  </p>
+
+  <div class="stats">
+
+    <div class="stat">
+      <div class="stat-label">TOTAL SIGNUPS</div>
+      <div class="stat-value" id="totalSignups">—</div>
     </div>
 
-    <div class="nav">
-      <button onclick="showSection('overview')">📊 Overview</button>
-      <button onclick="showSection('customers')">👥 Customers</button>
-      <button onclick="showSection('orders')">🛒 Orders</button>
-      <button onclick="showSection('analytics')">📈 Analytics</button>
-      <button onclick="showSection('settings')">⚙️ Settings</button>
+    <div class="stat">
+      <div class="stat-label">TODAY</div>
+      <div class="stat-value" id="todaySignups">—</div>
     </div>
 
-  </aside>
-
-
-  <main class="main">
-
-    <div class="top">
-      <h1>Overview</h1>
-      <div class="status">● Website Online</div>
+    <div class="stat">
+      <div class="stat-label">LATEST SIGNUP</div>
+      <div class="stat-value" id="latestSignup">—</div>
     </div>
 
+  </div>
 
-    <section id="overview">
+  <div class="panel">
 
-      <div class="cards">
+    <div class="panel-header">
+      <h2>Waitlist</h2>
 
-        <div class="card">
-          <div class="card-title">Visitors</div>
-          <div class="number">0</div>
-        </div>
+      <button class="refresh" onclick="loadWaitlist()">
+        Refresh
+      </button>
+    </div>
 
-        <div class="card">
-          <div class="card-title">Page Views</div>
-          <div class="number">0</div>
-        </div>
+    <div class="table-wrapper">
 
-        <div class="card">
-          <div class="card-title">Waitlist</div>
-          <div class="number">0</div>
-        </div>
+      <table>
 
-        <div class="card">
-          <div class="card-title">Orders</div>
-          <div class="number">0</div>
-        </div>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Joined</th>
+          </tr>
+        </thead>
 
-      </div>
+        <tbody id="waitlistBody">
+          <tr>
+            <td colspan="3" class="empty">
+              Loading...
+            </td>
+          </tr>
+        </tbody>
 
+      </table>
 
-      <div class="content">
+    </div>
 
-        <div class="panel">
+  </div>
 
-          <h2>Visitors</h2>
+  <div class="status" id="status">
+    Connecting to Veyro database...
+  </div>
 
-          <div class="chart">
-            <div class="bar" style="height: 20%;"></div>
-            <div class="bar" style="height: 35%;"></div>
-            <div class="bar" style="height: 25%;"></div>
-            <div class="bar" style="height: 50%;"></div>
-            <div class="bar" style="height: 40%;"></div>
-            <div class="bar" style="height: 65%;"></div>
-            <div class="bar" style="height: 45%;"></div>
-          </div>
+</main>
 
-        </div>
+<script>
 
+const SUPABASE_URL =
+  "https://vltduiizkbzuupeyjdms.supabase.co";
 
-        <div class="panel">
-
-          <h2>Recent Signups</h2>
-
-          <div class="empty">
-            No signups yet.
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
+const SUPABASE_ANON_KEY =
+  "YOUR_PUBLISHABLE_KEY_HERE";
 
 
-    <section id="customers" style="display:none;">
+async function loadWaitlist() {
 
-      <div class="panel">
+  const body = document.getElementById("waitlistBody");
+  const status = document.getElementById("status");
 
-        <h2>Customers & Waitlist</h2>
+  status.textContent = "Loading...";
 
-        <div class="empty">
-          Customer data will appear here once we connect the database.
-        </div>
+  try {
 
-      </div>
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/waitlist?select=id,email,created_at&order=created_at.desc`,
+      {
+        method: "GET",
 
-    </section>
+        headers: {
+          "apikey": SUPABASE_ANON_KEY,
+          "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+        }
+      }
+    );
 
+    if (!response.ok) {
 
-    <section id="orders" style="display:none;">
+      const error = await response.text();
 
-      <div class="panel">
+      console.error(error);
 
-        <h2>Orders</h2>
-
-        <div class="empty">
-          No orders yet.
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <section id="analytics" style="display:none;">
-
-      <div class="panel">
-
-        <h2>Website Analytics</h2>
-
-        <div class="empty">
-          Analytics will appear here once we connect visitor tracking.
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <section id="settings" style="display:none;">
-
-      <div class="panel">
-
-        <h2>Settings</h2>
-
-        <div class="empty">
-          Dashboard settings will go here.
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <script>
-
-    function showSection(section) {
-
-      const sections = [
-        "overview",
-        "customers",
-        "orders",
-        "analytics",
-        "settings"
-      ];
-
-      sections.forEach(function(id) {
-        document.getElementById(id).style.display =
-          id === section ? "block" : "none";
-      });
-
-      const titles = {
-        overview: "Overview",
-        customers: "Customers",
-        orders: "Orders",
-        analytics: "Analytics",
-        settings: "Settings"
-      };
-
-      document.querySelector(".top h1").textContent =
-        titles[section];
+      throw new Error(error);
     }
 
-  </script>
+    const data = await response.json();
+
+    document.getElementById("totalSignups").textContent =
+      data.length;
+
+    const today = new Date().toISOString().slice(0, 10);
+
+    const todayCount = data.filter(row => {
+      return row.created_at.slice(0, 10) === today;
+    }).length;
+
+    document.getElementById("todaySignups").textContent =
+      todayCount;
+
+    if (data.length > 0) {
+
+      const latestDate = new Date(data[0].created_at);
+
+      document.getElementById("latestSignup").textContent =
+        latestDate.toLocaleDateString();
+    } else {
+
+      document.getElementById("latestSignup").textContent =
+        "None";
+    }
+
+    if (data.length === 0) {
+
+      body.innerHTML = `
+        <tr>
+          <td colspan="3" class="empty">
+            No waitlist signups yet.
+          </td>
+        </tr>
+      `;
+
+    } else {
+
+      body.innerHTML = data.map(row => {
+
+        const date = new Date(row.created_at);
+
+        return `
+          <tr>
+            <td>${row.id}</td>
+            <td>${escapeHtml(row.email)}</td>
+            <td>${date.toLocaleString()}</td>
+          </tr>
+        `;
+
+      }).join("");
+    }
+
+    status.textContent =
+      `Connected • ${data.length} signup${data.length === 1 ? "" : "s"}`;
+
+  } catch (error) {
+
+    console.error(error);
+
+    body.innerHTML = `
+      <tr>
+        <td colspan="3" class="empty">
+          Could not load waitlist.
+        </td>
+      </tr>
+    `;
+
+    status.textContent =
+      "Database connection failed.";
+  }
+}
+
+
+function escapeHtml(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+loadWaitlist();
+
+</script>
 
 </body>
 </html>
