@@ -26,6 +26,230 @@
       font: inherit;
     }
 
+    /* HEADER */
+
+    header {
+      padding: 25px 6%;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 900;
+      letter-spacing: 4px;
+      font-size: 22px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .admin-label {
+      color: #999;
+      font-size: 14px;
+    }
+
+    .logout {
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    /* MAIN */
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 60px 6%;
+    }
+
+    h1 {
+      font-size: clamp(40px, 6vw, 70px);
+      letter-spacing: -4px;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #999;
+      margin-bottom: 45px;
+    }
+
+    /* STATS */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+
+    .stat {
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    .stat-label {
+      color: #999;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .stat-value {
+      font-size: 42px;
+      font-weight: 800;
+    }
+
+    /* CHARTS */
+
+    .charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 40px;
+    }
+
+    .chart-panel {
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 25px;
+    }
+
+    .chart-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .chart-subtitle {
+      color: #777;
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+
+    .chart {
+      height: 230px;
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      padding: 10px 0 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .bar-container {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .bar {
+      width: 100%;
+      max-width: 32px;
+      min-height: 2px;
+      background: white;
+      border-radius: 5px 5px 0 0;
+      transition: height 0.4s ease;
+    }
+
+    .bar-label {
+      color: #777;
+      font-size: 10px;
+      margin-top: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    .bar-value {
+      color: #aaa;
+      font-size: 10px;
+      margin-bottom: 5px;
+    }
+
+    /* PANELS */
+
+    .panel {
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 22px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .panel-header h2 {
+      font-size: 20px;
+    }
+
+    .refresh {
+      border: none;
+      background: white;
+      color: black;
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 17px 25px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    th {
+      color: #999;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    td {
+      color: #ddd;
+    }
+
+    .empty {
+      text-align: center;
+      color: #777;
+      padding: 50px;
+    }
+
+    .status {
+      margin-top: 20px;
+      color: #999;
+      font-size: 14px;
+    }
+
     /* LOGIN */
 
     #loginScreen {
@@ -101,158 +325,22 @@
       min-height: 20px;
     }
 
-    /* DASHBOARD */
-
     #dashboard {
       display: none;
     }
 
-    header {
-      padding: 25px 6%;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    /* MOBILE */
 
-    .logo {
-      font-weight: 900;
-      letter-spacing: 4px;
-      font-size: 22px;
-    }
+    @media (max-width: 850px) {
 
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
+      .charts {
+        grid-template-columns: 1fr;
+      }
 
-    .admin-label {
-      color: #999;
-      font-size: 14px;
-    }
-
-    .logout {
-      border: 1px solid rgba(255,255,255,0.15);
-      background: transparent;
-      color: white;
-      padding: 8px 15px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    main {
-      max-width: 1200px;
-      margin: auto;
-      padding: 60px 6%;
-    }
-
-    h1 {
-      font-size: clamp(40px, 6vw, 70px);
-      letter-spacing: -4px;
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      color: #999;
-      margin-bottom: 45px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 40px;
-    }
-
-    .stat {
-      background: #111;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 28px;
-    }
-
-    .stat-label {
-      color: #999;
-      font-size: 14px;
-      margin-bottom: 12px;
-    }
-
-    .stat-value {
-      font-size: 42px;
-      font-weight: 800;
-    }
-
-    .panel {
-      background: #111;
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .panel-header {
-      padding: 22px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .panel-header h2 {
-      font-size: 20px;
-    }
-
-    .refresh {
-      border: none;
-      background: white;
-      color: black;
-      padding: 9px 16px;
-      border-radius: 999px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .table-wrapper {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th,
-    td {
-      padding: 17px 25px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-
-    th {
-      color: #999;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    td {
-      color: #ddd;
-    }
-
-    .empty {
-      text-align: center;
-      color: #777;
-      padding: 50px;
-    }
-
-    .status {
-      margin-top: 20px;
-      color: #999;
-      font-size: 14px;
     }
 
     @media (max-width: 750px) {
+
       .stats {
         grid-template-columns: 1fr;
       }
@@ -273,6 +361,11 @@
       .login-box {
         padding: 30px;
       }
+
+      .chart {
+        height: 200px;
+      }
+
     }
   </style>
 </head>
@@ -428,7 +521,59 @@
     </div>
 
 
+    <!-- ===================================================== -->
+    <!-- CHARTS -->
+    <!-- ===================================================== -->
+
+    <div class="charts">
+
+
+      <!-- DAILY -->
+
+      <div class="chart-panel">
+
+        <div class="chart-title">
+          Daily Signups
+        </div>
+
+        <div class="chart-subtitle">
+          Last 14 days
+        </div>
+
+        <div
+          class="chart"
+          id="dailyChart"
+        ></div>
+
+      </div>
+
+
+      <!-- WEEKLY -->
+
+      <div class="chart-panel">
+
+        <div class="chart-title">
+          Weekly Signups
+        </div>
+
+        <div class="chart-subtitle">
+          Last 8 weeks
+        </div>
+
+        <div
+          class="chart"
+          id="weeklyChart"
+        ></div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- ===================================================== -->
     <!-- WAITLIST -->
+    <!-- ===================================================== -->
 
     <div class="panel">
 
@@ -531,7 +676,7 @@ const loginMessage =
 
 
 /* ============================================================
-   SUPABASE LOGIN
+   LOGIN
    ============================================================ */
 
 loginForm.addEventListener(
@@ -593,10 +738,6 @@ loginForm.addEventListener(
 
       }
 
-
-      /*
-        Save the Supabase session.
-      */
 
       localStorage.setItem(
         "veyro_access_token",
@@ -733,13 +874,11 @@ async function loadWaitlist() {
           method: "GET",
 
           headers: {
-
             "apikey":
               SUPABASE_ANON_KEY,
 
             "Authorization":
               `Bearer ${token}`
-
           }
 
         }
@@ -757,10 +896,6 @@ async function loadWaitlist() {
         responseText
       );
 
-      /*
-        If the session has expired,
-        return to login.
-      */
 
       if (
         response.status === 401 ||
@@ -788,6 +923,7 @@ async function loadWaitlist() {
 
       }
 
+
       throw new Error(
         responseText ||
         "Could not load waitlist."
@@ -801,7 +937,7 @@ async function loadWaitlist() {
 
 
     /* ========================================================
-       TOTAL SIGNUPS
+       STATS
        ======================================================== */
 
     document.getElementById(
@@ -809,10 +945,6 @@ async function loadWaitlist() {
     ).textContent =
       data.length;
 
-
-    /* ========================================================
-       TODAY
-       ======================================================== */
 
     const today =
       new Date()
@@ -834,10 +966,6 @@ async function loadWaitlist() {
     ).textContent =
       todayCount;
 
-
-    /* ========================================================
-       LATEST SIGNUP
-       ======================================================== */
 
     if (data.length > 0) {
 
@@ -919,6 +1047,14 @@ async function loadWaitlist() {
     }
 
 
+    /* ========================================================
+       CHARTS
+       ======================================================== */
+
+    createDailyChart(data);
+    createWeeklyChart(data);
+
+
     status.textContent =
       `Connected • ${data.length} signup${
         data.length === 1
@@ -952,6 +1088,296 @@ async function loadWaitlist() {
       "Database connection failed.";
 
   }
+
+}
+
+
+/* ============================================================
+   DAILY CHART
+   ============================================================ */
+
+function createDailyChart(data) {
+
+  const chart =
+    document.getElementById(
+      "dailyChart"
+    );
+
+
+  chart.innerHTML = "";
+
+
+  const days = [];
+
+
+  for (
+    let i = 13;
+    i >= 0;
+    i--
+  ) {
+
+    const date =
+      new Date();
+
+    date.setHours(
+      0,
+      0,
+      0,
+      0
+    );
+
+    date.setDate(
+      date.getDate() - i
+    );
+
+
+    const key =
+      date
+        .toISOString()
+        .slice(0, 10);
+
+
+    const count =
+      data.filter(row => {
+
+        return row.created_at
+          .slice(0, 10) === key;
+
+      }).length;
+
+
+    days.push({
+      date: date,
+      count: count
+    });
+
+  }
+
+
+  const max =
+    Math.max(
+      ...days.map(day => day.count),
+      1
+    );
+
+
+  days.forEach(day => {
+
+    const container =
+      document.createElement(
+        "div"
+      );
+
+    container.className =
+      "bar-container";
+
+
+    const value =
+      document.createElement(
+        "div"
+      );
+
+    value.className =
+      "bar-value";
+
+    value.textContent =
+      day.count;
+
+
+    const bar =
+      document.createElement(
+        "div"
+      );
+
+    bar.className =
+      "bar";
+
+    bar.style.height =
+      `${Math.max(
+        2,
+        (day.count / max) * 180
+      )}px`;
+
+
+    const label =
+      document.createElement(
+        "div"
+      );
+
+    label.className =
+      "bar-label";
+
+    label.textContent =
+      day.date.toLocaleDateString(
+        undefined,
+        {
+          day: "numeric",
+          month: "short"
+        }
+      );
+
+
+    container.appendChild(value);
+    container.appendChild(bar);
+    container.appendChild(label);
+
+    chart.appendChild(container);
+
+  });
+
+}
+
+
+/* ============================================================
+   WEEKLY CHART
+   ============================================================ */
+
+function createWeeklyChart(data) {
+
+  const chart =
+    document.getElementById(
+      "weeklyChart"
+    );
+
+
+  chart.innerHTML = "";
+
+
+  const weeks = [];
+
+
+  for (
+    let i = 7;
+    i >= 0;
+    i--
+  ) {
+
+    const end =
+      new Date();
+
+    end.setHours(
+      23,
+      59,
+      59,
+      999
+    );
+
+    end.setDate(
+      end.getDate() -
+      i * 7
+    );
+
+
+    const start =
+      new Date(end);
+
+    start.setHours(
+      0,
+      0,
+      0,
+      0
+    );
+
+    start.setDate(
+      start.getDate() - 6
+    );
+
+
+    const count =
+      data.filter(row => {
+
+        const created =
+          new Date(
+            row.created_at
+          );
+
+        return (
+          created >= start &&
+          created <= end
+        );
+
+      }).length;
+
+
+    weeks.push({
+      start: start,
+      end: end,
+      count: count
+    });
+
+  }
+
+
+  const max =
+    Math.max(
+      ...weeks.map(week => week.count),
+      1
+    );
+
+
+  weeks.forEach(week => {
+
+    const container =
+      document.createElement(
+        "div"
+      );
+
+    container.className =
+      "bar-container";
+
+
+    const value =
+      document.createElement(
+        "div"
+      );
+
+    value.className =
+      "bar-value";
+
+    value.textContent =
+      week.count;
+
+
+    const bar =
+      document.createElement(
+        "div"
+      );
+
+    bar.className =
+      "bar";
+
+    bar.style.height =
+      `${Math.max(
+        2,
+        (week.count / max) * 180
+      )}px`;
+
+
+    const label =
+      document.createElement(
+        "div"
+      );
+
+    label.className =
+      "bar-label";
+
+    label.textContent =
+      week.start.toLocaleDateString(
+        undefined,
+        {
+          day: "numeric",
+          month: "short"
+        }
+      );
+
+
+    container.appendChild(value);
+    container.appendChild(bar);
+    container.appendChild(label);
+
+    chart.appendChild(container);
+
+  });
 
 }
 
@@ -1005,7 +1431,7 @@ function escapeHtml(value) {
 
 
 /* ============================================================
-   CHECK EXISTING SESSION
+   EXISTING SESSION
    ============================================================ */
 
 const existingToken =
